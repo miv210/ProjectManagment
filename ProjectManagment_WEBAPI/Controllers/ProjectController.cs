@@ -20,11 +20,9 @@ namespace ProjectManagment_WEBAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProjectsWorker>>> Get()
+        public async Task<ActionResult<IEnumerable<Project>>> Get()
         {
             return repProject.GetAll();
-
-            //return  await db.ProjectsWorkers.Include(p => p.IdProjectNavigation).Include(p => p.IdWorkerNavigation).ToListAsync();
         }
     }
 }

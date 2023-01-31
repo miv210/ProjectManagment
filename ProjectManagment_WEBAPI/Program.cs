@@ -19,7 +19,12 @@ builder.Services.AddControllersWithViews().AddNewtonsoftJson(options =>
 builder.Services.AddControllers();
 builder.Services.AddTransient<IProjectRepository, ProjectRepository>();
 
+builder.Services.AddCors();
+
 var app = builder.Build();
+
+// настраиваем CORS
+app.UseCors(builder => builder.AllowAnyOrigin());
 
 
 // Configure the HTTP request pipeline.
@@ -29,11 +34,10 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.UseRouting();
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Project}");
-app.MapDefaultControllerRoute();
 
 app.MapControllers();
+app.MapDefaultControllerRoute();
+
+app.MapGet("/", () => "Hello World!");
 
 app.Run();

@@ -4,7 +4,7 @@ using System.Text.Json;
 
 namespace ProjectManagment_WEBAPI.Repository
 {
-    public class ProjectRepository<TDbModel> : IProjectRepository<TDbModel> where TDbModel : BaseModel
+    public class ProjectRepository: IProjectRepository
     {
         Project_ManagmentContext Context;
 
@@ -27,9 +27,9 @@ namespace ProjectManagment_WEBAPI.Repository
             Context.SaveChanges();
         }
 
-        public List<ProjectsWorker> GetAll()
+        public List<Project> GetAll()
         {
-            return Context.ProjectsWorkers.Include(p=> p.IdProjectNavigation).Include(p=> p.IdWorkerNavigation).ToList();
+            return Context.Projects.Include(p=> p.IdManagerNavigation).ToList();
         }
 
         public Project Update(Project project)
